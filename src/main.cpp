@@ -1,6 +1,5 @@
 #include "grunt/client/LoginChallenge.h"
 #include "grunt/server/LoginChallenge.h"
-#define HEXI_WITH_ASIO 
 #include "hexi/hexi.h"
 #include <asio/io_context.hpp>
 #include <asio/co_spawn.hpp>
@@ -165,7 +164,6 @@ asio::awaitable<grunt::server::LoginChallenge> read_challenge(asio::ip::tcp::soc
 	
 	co_return s_challenge;
 }
-
 
 void help() {
 	for (const auto& [arg, option] : params) {
