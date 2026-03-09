@@ -1,0 +1,10 @@
+set(EXECUTABLE_NAME wowthing)
+
+set(EXECUTABLE_SRC
+    main.cpp
+)
+
+add_executable(${EXECUTABLE_NAME} ${EXECUTABLE_SRC})
+target_include_directories(${EXECUTABLE_NAME} PRIVATE ${HEXI_INCLUDE_DIRS})
+target_link_libraries(${EXECUTABLE_NAME} PRIVATE asio::asio)
+install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
