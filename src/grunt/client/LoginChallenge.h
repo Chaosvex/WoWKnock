@@ -68,7 +68,7 @@ public:
 	const static int challenge_version = 3;
 	const static int reconnect_challenge_version = 2;
 
-	Opcode opcode;
+	Opcode opcode = Opcode::cmd_auth_logon_challenge;
 	std::uint8_t protocol_ver = 0;
 	std::uint16_t body_size = 0;
 	Game game;
