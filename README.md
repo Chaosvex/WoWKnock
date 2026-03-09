@@ -17,12 +17,18 @@ wowknock -host login.example.com -port 3724 -user administrator
 ```
 ### Example output
 ```
-If found:
-Account "administrator" exists or server is not leaking
+If found and no mitigations are present:
+Server is not mitigating
+Account "administrator" exists and is likely a true positive
 Account has 2FA enabled
 
-If not found:
-Account "administrator" does not exist
+If found but the server tried to fool the query:
+Server is most likely mitigating, trying again...
+Server is mitigating but is still leaking
+Account "test" exists and is likely a true positive
+Account does not have 2FA enabled
+
+The output will vary based on whether the tool was able to detect any mitigations.
 ```
 
 ## Plugging the leak

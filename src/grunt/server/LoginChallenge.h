@@ -48,9 +48,7 @@ class LoginChallenge final {
 
 		std::array<std::uint8_t, prime_length> n_buff;
 		stream >> n_buff;
-
-		std::array<std::uint8_t, salt_length> s_buff;
-		stream >> s_buff;
+		stream >> salt;
 		stream >> checksum_salt;
 		stream >> two_factor_auth;
 
@@ -75,6 +73,8 @@ class LoginChallenge final {
 	}
 
 public:
+	LoginChallenge() {};
+
 	static const std::uint8_t prime_length         = 32;
 	static const std::uint8_t pub_key_length       = 32;
 	static const std::uint8_t pin_salt_length      = 16;
@@ -98,6 +98,7 @@ public:
 	bool two_factor_auth = false;
 	std::uint32_t pin_grid_seed;
 	std::array<std::uint8_t, pin_salt_length> pin_salt;
+	std::array<std::uint8_t, salt_length> salt;
 
 	// todo - early abort (wire length change)
 	State read_from_stream(auto& stream) {
