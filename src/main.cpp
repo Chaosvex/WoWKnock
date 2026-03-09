@@ -104,7 +104,7 @@ asio::awaitable<bool> detect_mitigations(asio::io_context& context,
 				std::println("Server is mitigating but is still leaking");
 				mitigating = false;
 			} else {
-				std::println("Server does not appear to be leaking");
+				std::println("Server appears to be correctly mitigating (or unknown salt generation method)");
 			}
 		} else {
 			std::print("Server returned a different result. Weird. Steaming on ahead...");
