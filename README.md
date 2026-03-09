@@ -5,11 +5,17 @@ Most World of Warcraft server emulators leak information on whether an account e
 
 It's hardcoded to support 1.12.1 5875 but would work with later clients with minimal modifications.
 
-## Usage example:
+## Building
+Requires CMake and optionally vcpkg to auto-install dependencies (Asio and Hexi).
+```
+cmake . -B build -DCMAKE_TOOLCHAIN_FILE=path/to/vcpkg.cmake
+```
+
+## Usage example
 ```
 wowknock -host login.example.com -port 3724 -user administrator
 ```
-### Example output:
+### Example output
 ```
 If found:
 Account "administrator" exists or server is not leaking
