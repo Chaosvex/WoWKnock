@@ -139,8 +139,11 @@ asio::awaitable<void> run(asio::io_context& context, parsed_args args) {
 		case grunt::Result::fail_db_busy:
 			std::println("Login was unable to process the request");
 			break;
+		case grunt::Result::fail_banned:
+			std::println("Account found and is banned");
+			break;
 		default:
-			std::println("Unhandled response code");
+			std::println("Unhandled response code, {}" , (int)response.result);
 			break;
 		}
 
@@ -225,7 +228,7 @@ asio::awaitable<void> send_challenge(asio::ip::tcp::socket& socket, const std::s
 
 	if(ec) {
 		std::println("Encountered an error while sending challenge");
-		std::abort();
+		std::exit(EXIT_FAILURE);
 	}
 }
 
@@ -242,7 +245,7 @@ asio::awaitable<grunt::server::LoginChallenge> read_challenge(asio::ip::tcp::soc
 
 		if(ec) {
 			std::println("Encountered an error while reading challenge");
-			std::abort();
+			std::exit(EXIT_FAILURE);
 		}
 
 		adaptor.advance_write(size);
@@ -251,7 +254,7 @@ asio::awaitable<grunt::server::LoginChallenge> read_challenge(asio::ip::tcp::soc
 
 	if(read_state != State::done) {
 		std::println("Challenge reading oopsie, farewell");
-		std::abort();
+		std::exit(EXIT_FAILURE);
 	}
 	
 	co_return s_challenge;
